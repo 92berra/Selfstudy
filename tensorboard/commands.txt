@@ -1,0 +1,5 @@
+export PATH="/opt/anaconda3/etc/profile.d:$PATH"
+source conda.sh
+conda activate
+conda create -n tf-ex
+conda activate tf-ex
