@@ -118,4 +118,4 @@
 --49> EMP 테이블에서 부서 인원이 4명보다 많은 부서의 부서 번호, 인원 수, 급여의 합을 출력하라.
 
 
-<a href="https://97godo.tistory.com/9">Resource</a>
+--Resource> https://97godo.tistory.com/9
