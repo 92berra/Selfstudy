@@ -1,26 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import { useTrail, a } from '@react-spring/web';
 
-function App() {
+import styles from './styles.module.css';
+
+type TrailProps = {
+  open: boolean;
+  children: React.ReactNode; // Adding children to the props definition
+};
+
+const Trail: React.FC<TrailProps> = ({ open, children }) => {
+  const items = React.Children.toArray(children);
+  const trail = useTrail(items.length, {
+    config: { mass: 5, tension: 2000, friction: 200 },
+    opacity: open ? 1 : 0,
+    x: open ? 0 : 20,
+    height: open ? 110 : 0,
+    from: { opacity: 0, x: 20, height: 0 },
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {trail.map(({ height, ...style }, index) => (
+        <a.div key={index} className={styles.trailsText} style={style}>
+          <a.div style={{ height }}>{items[index]}</a.div>
+        </a.div>
+      ))}
+    </div>
+  );
+};
+
+export default function App() {
+  const [open, set] = useState(true);
+  return (
+    <div className={styles.container} onClick={() => set(state => !state)}>
+      <Trail open={open}>
+        <span>Lorem</span>
+        <span>Ipsum</span>
+        <span>Dolor</span>
+        <span>Sit</span>
+      </Trail>
     </div>
   );
 }
-
-export default App;
