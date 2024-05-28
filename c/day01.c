@@ -1,16 +1,22 @@
 #include <stdio.h>
-main() {
+int main() {
     int a = 50;
     int *b = &a;
     *b = *b + 20;
-    printf("%d, %d\n", a, b);
+    printf("%d, %d\n", a, *b);
 
     char *s;
     s = "gilbut";
 
-    for (int i=0; i<6; i++) {
+    for (int i=0; i<6; i+=2) {
         printf("%c, ", s[i]);
         printf("%c, ", *(s + i));
         printf("%s\n", s+i);
     }
 }
+
+// =thread-selected,id="1"
+// 70, 70
+// g, g, gilbut
+// l, l, lbut
+// u, u, ut
