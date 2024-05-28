@@ -9,3 +9,5 @@ int main() {
 
     printf("%d", *array[1] + **array + 1);
 }
+
+// 37

@@ -13,3 +13,6 @@ int main() {
     printf("%s \n", p->name);
     printf("%d \n", p->age);
 }
+
+// Lee
+// 38

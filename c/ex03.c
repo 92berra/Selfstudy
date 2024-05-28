@@ -9,3 +9,5 @@ int main() {
         s = s + ary[i];
     printf("%d", s);
 }
+
+// 8

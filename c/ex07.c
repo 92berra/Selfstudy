@@ -20,3 +20,5 @@ int main() {
     (p + 1)->hhab = (p + 1)->hab + p->os + p->db;
     printf("%d", (p + 1)->hab + (p + 1)->hhab);
 }
+
+// 501

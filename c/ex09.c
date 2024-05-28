@@ -4,7 +4,7 @@ struct A {
     int g;
 };
 
-main() {
+int main() {
     struct A st[2];
 
     for (int i=0; i<2; i++) {
@@ -14,3 +14,5 @@ main() {
 
     printf("%d", st[0].n + st[1].g);
 }
+
+// 2

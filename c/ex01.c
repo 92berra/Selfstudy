@@ -15,7 +15,6 @@ int main() {
     }
 }
 
-// =thread-selected,id="1"
 // 70, 70
 // g, g, gilbut
 // l, l, lbut
