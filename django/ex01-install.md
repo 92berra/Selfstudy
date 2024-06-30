@@ -8,7 +8,6 @@ conda activate django
 ```
 
 <br/>
-<br/>
 
 #### Install
 
@@ -18,7 +17,6 @@ python -m django --version
 ```
 
 <br/>
-<br/>
 
 #### Create django project
 
@@ -26,7 +24,6 @@ python -m django --version
 django-admin startproject {project name}
 ```
 
-<br/>
 <br/>
 
 #### Settings.py
@@ -42,7 +39,6 @@ USE_TZ = False
 ```
 
 <br/>
-<br/>
 
 #### Varification
 
@@ -52,3 +48,11 @@ python manage.py runserver
 ```
 
 <li>https://127.0.0.1:8000</li>
+
+<br/>
+<br/>
+<br/>
+
+<div align='center'>
+92 berra ©2024
+</div>
