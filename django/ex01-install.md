@@ -1,4 +1,4 @@
-# Django Commands
+# Install
 
 #### Environment Setting
 
