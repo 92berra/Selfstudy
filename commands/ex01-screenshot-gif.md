@@ -1,5 +1,7 @@
 # Screenshot(Recording) to GIF
 
+<br/>
+
 ### Install
 
 ```

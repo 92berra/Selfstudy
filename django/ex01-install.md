@@ -1,5 +1,7 @@
 # Install
 
+<br/>
+
 ```
 conda create -n django python=3.9
 conda activate django
