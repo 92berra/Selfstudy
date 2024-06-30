@@ -1,16 +1,18 @@
 # Screenshot(Recording) to GIF
 
 <br/>
+<br/>
 
-### Install
+#### Install
 
 ```
 brew install ffmpeg
 ```
 
 <br/>
+<br/>
 
-### Transform
+#### Transform
 
 ```
 ffmpeg -i input.mov -vf "fps=10,scale=320:-1:flags=lanczos" output.gif
