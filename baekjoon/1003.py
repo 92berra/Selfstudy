@@ -1,4 +1,3 @@
-
 def fibonacci(n):
     global count_a
     global count_b

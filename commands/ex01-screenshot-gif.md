@@ -20,7 +20,8 @@ ffmpeg -i input.mov -vf "fps=10,scale=320:-1:flags=lanczos" output.gif
 <br/>
 <br/>
 <br/>
+<br/>
 
 <div align='center'>
-92 berra ©2024
+92berra ©2024
 </div>
