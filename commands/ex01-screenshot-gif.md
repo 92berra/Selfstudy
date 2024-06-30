@@ -18,7 +18,9 @@ ffmpeg -i input.mov -vf "fps=10,scale=320:-1:flags=lanczos" output.gif
 <li>scale=320:-1 : 너비를 320픽셀로 조정하며 높이는 비율에 맞게 자동으로 설정</li>
 
 <br/>
+<br/>
+<br/>
 
 <div align='center'>
-Berra Oh ©2024
+92 berra ©2024
 </div>
