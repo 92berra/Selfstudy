@@ -1,8 +1,8 @@
-# Install
+# Django Commands
 
 <br/>
 
-### Environment Setting
+Environment Setting
 
 ```
 conda create -n django python=3.9
@@ -11,7 +11,7 @@ conda activate django
 
 <br/>
 
-### Install
+Install
 
 ```
 pip install django
@@ -20,7 +20,7 @@ python -m django --version
 
 <br/>
 
-### Create django project
+Create django project
 
 ```
 django-admin startproject {project name}
@@ -28,7 +28,7 @@ django-admin startproject {project name}
 
 <br/>
 
-### Settings.py
+Settings.py
 
 ```
 # Internationalization
@@ -42,7 +42,7 @@ USE_TZ = False
 
 <br/>
 
-### Varification
+Varification
 
 ```
 cd {project directory}
