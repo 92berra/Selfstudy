@@ -13,5 +13,5 @@
 <br/>
 
 <div align='center'>
-92berra ©2024
+Copyright. 92berra 2024
 </div>
