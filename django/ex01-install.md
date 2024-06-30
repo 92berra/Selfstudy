@@ -1,8 +1,5 @@
 # Django Commands
 
-<br/>
-<br/>
-
 #### Environment Setting
 
 ```
