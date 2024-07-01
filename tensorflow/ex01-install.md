@@ -1,8 +1,5 @@
 # M3 Macbook Pro Tensorflow Install Guide
-
-<br/>
-
-## Environment Setting
+### Environment Setting
 
 ```
 conda create -n tf-metal python=3.8
@@ -11,7 +8,7 @@ conda activate tf-metal
 
 <br/>
 
-## Install Tensorflow Dependencies
+### Install Tensorflow Dependencies
 
 ```
 conda install -c apple tensorflow-deps
@@ -19,7 +16,7 @@ conda install -c apple tensorflow-deps
 
 <br/>
 
-## Install Tensorflow
+### Install Tensorflow
 
 ```
 python -m pip install tensorflow-macos
@@ -27,7 +24,7 @@ python -m pip install tensorflow-macos
 
 <br/>
 
-## Install Tensorflow Metal
+### Install Tensorflow Metal
 
 To utilize the Apple's gpu framework for M3, M3 Pro and M3 Max.
 
@@ -37,7 +34,7 @@ python -m pip install tensorflow-metal
 
 <br/>
 
-## Install Jupyter
+### Install Jupyter
 
 ```
 conda install -c conda-forge jupyter
@@ -45,7 +42,7 @@ conda install -c conda-forge jupyter
 
 <br/>
 
-## Varification
+### Varification
 
 ```
 ipython
