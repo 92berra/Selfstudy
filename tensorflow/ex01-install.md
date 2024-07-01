@@ -85,8 +85,11 @@ Out[4]:
  xla_global_id: -1]
 ```
 
-Congratulations. 🎉
+<br/>
 
+<div align='center'>
+Congratulations. 🎉
+</div>
 
 <br/>
 <br/>
