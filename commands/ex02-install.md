@@ -42,54 +42,6 @@ conda info --envs
 <br/>
 <br/>
 
-## Tensorflow 
-
-```
-python3 -m pip install tensorflow
-python3 -m pip install tensorflow-metal
-```
-
-```
-import tensorflow as tf
-tf.__version__
-tf.config.list_physical_devices('GPU')
-quit()
-```
-
-<li>tf.config.list_physical_devices('GPU') 실행 결과 [ ] 만 뜨면 GPU 사용이 불가한 상태이다. 아래 코드를 test.py 로 저장 해 실행하면 훈련이 되는 것을 확인할 수 있다. 여기까지 된다면 성공적으로 설치된 것이다. </li>
-
-<br/>
-<br/>
-
-#### Tensorflow Installation Varification
-
-```
-import tensorflow as tf
-
-mnist = tf.keras.datasets.mnist
-
-(x_train, y_train), (x_test, y_test) = mnist.load_data()
-x_train, x_test = x_train / 255.0, x_test / 255.0
-
-model = tf.keras.models.Sequential([
-     tf.keras.layers.Flatten(input_shape=(28, 28)),
-     tf.keras.layers.Dense(128, activation='relu'),
-     tf.keras.layers.Dropout(0.2),
-     tf.keras.layers.Dense(10, activation='softmax')])
-
-model.compile(optimizer='adam',
-     loss='sparse_categorical_crossentropy',
-     metrics=['accuracy'])
-
-model.fit(x_train, y_train, epochs=5)
-model.evaluate(x_test, y_test, verbose=2)
-```
-
-<br/>
-<br/>
-<br/>
-<br/>
-
 ## React
 
 ```
