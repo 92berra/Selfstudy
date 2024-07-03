@@ -1,4 +1,5 @@
 import torch
+from torch import nn
 
 def check_mps_available():
     if torch.backends.mps.is_available():
