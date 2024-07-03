@@ -79,13 +79,13 @@ train_dataloader = DataLoader(training_data, batch_size=64, shuffle=True)
 test_dataloader = DataLoader(test_data, batch_size=64, shuffle=True)
 
 train_features, train_labels = next(iter(train_dataloader))
-print(f"Feature batch shape: {train_features.size()}")
-print(f"Labels batch shape: {train_labels.size()}")
+print(f"Feature batch shape: {train_features.size()}") # Feature batch shape: torch.Size([64, 1, 28, 28])
+print(f"Labels batch shape: {train_labels.size()}") # Labels batch shape: torch.Size([64])
 img = train_features[0].squeeze()
 label = train_labels[0]
 plt.imshow(img, cmap="gray")
 plt.show()
-print(f"Label: {label}")
+print(f"Label: {label}") # Label: 5
 
 
 ds = datasets.FashionMNIST(
@@ -100,7 +100,7 @@ target_transform = Lambda(lambda y: torch.zeros(
     10, dtype=torch.float).scatter_(dim=0, index=torch.tensor(y), value=1))
 
 device = "mps" if torch.backends.mps.is_available() else "cpu"
-print(f"Using {device} device")
+print(f"Using {device} device") # Using mps device
 
 
 class NeuralNetwork(nn.Module):
@@ -121,29 +121,29 @@ class NeuralNetwork(nn.Module):
         return logits
     
 model = NeuralNetwork().to(device)
-# print(model)
+print(model)
 
 X = torch.rand(1, 28, 28, device=device)
 
 logits = model(X)
 pred_probab = nn.Softmax(dim=1)(logits)
 y_pred = pred_probab.argmax(1)
-# print(f"Predicted class: {y_pred}")
+print(f"Predicted class: {y_pred}")
 
 input_image = torch.rand(3, 28, 28)
-# print(input_image.size())
+print(input_image.size())
 
 flatten = nn.Flatten()
 flat_image = flatten(input_image)
-# print(flat_image.size())
+print(flat_image.size())
 
 layer1 = nn.Linear(in_features=28*28, out_features=20)
 hidden1 = layer1(flat_image)
-# print(hidden1.size())
+print(hidden1.size())
 
-# print(f"Before ReLU: {hidden1}\n\n")
+print(f"Before ReLU: {hidden1}\n\n")
 hidden1 = nn.ReLU()(hidden1)
-# print(f"After ReLU: {hidden1}")
+print(f"After ReLU: {hidden1}")
 
 seq_modules = nn.Sequential(
     flatten,
@@ -161,3 +161,27 @@ print(f"Model structure: {model}\n\n")
 
 for name, param in model.named_parameters():
     print(f"Layer: {name} | Size: {param.size()} | Values: {param[:2]}\n")
+
+
+# Layer:  linear_relu_stack.0.weight | 
+#         Size: torch.Size([512, 784]) | 
+#         Values: tensor([[-0.0015, -0.0094, -0.0232,  ...,  0.0089, -0.0069,  0.0326], [ 0.0096, -0.0282,  0.0137,  ...,  0.0089,  0.0305,  0.0255]],
+#         device='mps:0', grad_fn=<SliceBackward0>)
+# Layer: linear_relu_stack.0.bias | 
+#         Size: torch.Size([512]) | 
+#         Values: tensor([-0.0275,  0.0209], device='mps:0', grad_fn=<SliceBackward0>)
+# Layer: linear_relu_stack.2.weight | 
+#         Size: torch.Size([512, 512]) | 
+#         Values: tensor([[-0.0175,  0.0322, -0.0060,  ..., -0.0274, -0.0021,  0.0386],[ 0.0285,  0.0403, -0.0065,  ..., -0.0134, -0.0122, -0.0394]],
+#         device='mps:0', grad_fn=<SliceBackward0>)
+# Layer: linear_relu_stack.2.bias | 
+#         Size: torch.Size([512]) | 
+#         Values: tensor([ 0.0230, -0.0066], device='mps:0', grad_fn=<SliceBackward0>)
+# Layer: linear_relu_stack.4.weight | 
+#         Size: torch.Size([10, 512]) | 
+#         Values: tensor([[ 0.0221,  0.0152,  0.0317,  ...,  0.0048,  0.0117, -0.0415],
+#         [-0.0361,  0.0291, -0.0071,  ..., -0.0166,  0.0132, -0.0185]],
+#         device='mps:0', grad_fn=<SliceBackward0>)
+# Layer: linear_relu_stack.4.bias | 
+#         Size: torch.Size([10]) | 
+#         Values: tensor([0.0242, 0.0173], device='mps:0', grad_fn=<SliceBackward0>)
