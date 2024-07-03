@@ -2,7 +2,7 @@
 ### Environment Setting
 
 ```
-conda create -n pytorch-gpu
+conda create -n pytorch-gpu python=3.9
 conda activate pytorch-gpu
 ```
 
