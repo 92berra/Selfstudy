@@ -59,7 +59,7 @@ python ex06-create-gif.py
 
 ### Result
 
-<img src='result/sample_animation.gif'/>
+<img src='pytorch/result/sample_animation.gif'/>
 
 <br/>
 <br/>
