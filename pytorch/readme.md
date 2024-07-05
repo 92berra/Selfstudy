@@ -1,7 +1,7 @@
 # PyTorch
 
 ## Contents
-1. [VanillaGAN with FashionMNIST](#1.-Vanilla-GAN-with-FashionMNIST)
+1. [VanillaGAN with FashionMNIST] (#1.-Vanilla-GAN-with-FashionMNIST)
 
 <br/>
 <br/>
