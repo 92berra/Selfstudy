@@ -1,13 +1,10 @@
 # PyTorch
 
-## Contents
-[1. VanillaGAN with FashionMNIST](#1.-Vanilla-GAN-with-FashionMNIST)
-
 <br/>
 <br/>
 <br/>
 
-## 1. Vanilla GAN with FashionMNIST
+## Vanilla GAN with FashionMNIST
 ### Environment
 - M3 Macbook Pro 
 - macOS Sonoma 14.5
