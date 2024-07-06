@@ -16,7 +16,7 @@
 conda create pytorch-mps python=3.9
 conda activate pytorch-mps
 conda install pytorch::pytorch torchvision torchaudio -c pytorch
-conda env update --file requirements.uml
+conda env update --file requirements.yml
 python -m ipykernel install --user --name pytorch-mps --display-name "Python 3.9(pytorch-mps)"
 ```
 
