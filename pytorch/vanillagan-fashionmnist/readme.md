@@ -39,13 +39,15 @@ training_data = datasets.FashionMNIST(
 
 <br/>
 
+Train using below command.
+
 ```
 python Vanilla-GAN-fashionMNIST.py
 ```
 
 <br/>
 
-Create gif using generated images.
+Create gif using generated images after training.
 
 ```
 python create-gif.py
