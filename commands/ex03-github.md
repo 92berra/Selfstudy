@@ -13,6 +13,17 @@ git fetch --unshallow
 
 <br/>
 <br/>
+
+#### Apply .gitignore
+
+```
+git rm -r --cached .
+git add .
+git commit -m "Apply .gitignore"
+```
+
+<br/>
+<br/>
 <br/>
 <br/>
 

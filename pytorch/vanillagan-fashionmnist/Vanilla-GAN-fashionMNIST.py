@@ -18,8 +18,7 @@ os.makedirs(model_dir, exist_ok=True)
 training_data = datasets.FashionMNIST(
     root='data',
     train=True,
-    #download=True,
-    download=False,
+    download=True,
     transform=ToTensor(),
     target_transform=Lambda(lambda y: torch.zeros(10, dtype=torch.float).scatter_(0, torch.tensor(y), value=1))
 )
@@ -27,22 +26,21 @@ training_data = datasets.FashionMNIST(
 test_data = datasets.FashionMNIST(
     root='data',
     train=False,
-    #download=True,
-    download=False,
+    download=True,
     transform=ToTensor()
 )
 
-NOISE_DIM = 100
+NOISE = 100
 INPUT_SIZE = 28 * 28
 BATCH_SIZE = 64
 EPOCHS = 200
 
 class Generator(nn.Module):
-    def __init__(self, noise_dim):
+    def __init__(self, noise):
         super(Generator, self).__init__()
         
         self.model = nn.Sequential(
-            nn.Linear(noise_dim, 256),
+            nn.Linear(noise, 256),
             nn.LeakyReLU(0.2),
             nn.Linear(256, 512),
             nn.LeakyReLU(0.2),
@@ -57,7 +55,7 @@ class Generator(nn.Module):
         img = img.view(img.size(0), 1, 28, 28)  # reshape to (batch_size, 1, 28, 28)
         return img
     
-generator = Generator(NOISE_DIM).to(device)
+generator = Generator(NOISE).to(device)
 print(f"Generate is using {device}.")
 
 class Discriminator(nn.Module):
@@ -96,7 +94,7 @@ optimizer_generator = optim.Adam(generator.parameters(), lr=1e-4)
 for param in discriminator.parameters():
     param.requires_grad = False
 
-gan_input = torch.randn(BATCH_SIZE, NOISE_DIM).to(device)
+gan_input = torch.randn(BATCH_SIZE, NOISE).to(device)
 x = generator(gan_input)
 output = discriminator(x)
 
@@ -120,7 +118,7 @@ def visualize_training(epoch, d_losses, g_losses, output_dir='result/sample', lo
     print('epoch: {}, Discriminator Loss: {}, Generator Loss: {}'.format(epoch, np.asarray(d_losses).mean(), np.asarray(g_losses).mean()))
     
     #Visualize after creating sample data
-    noise = torch.randn(24, NOISE_DIM).to(device)
+    noise = torch.randn(24, NOISE).to(device)
     generated_images = generator(noise).cpu().detach().numpy()
     generated_images = generated_images.reshape(-1, 28, 28)
     
@@ -157,7 +155,7 @@ for epoch in range(EPOCHS):
         d_loss_real = criterion(outputs, real_labels)
         d_loss_real.backward()
 
-        z = torch.randn(batch_size, NOISE_DIM).to(device)
+        z = torch.randn(batch_size, NOISE).to(device)
 
         fake_images = generator(z)
         outputs = discriminator(fake_images.detach())

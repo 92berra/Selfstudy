@@ -24,33 +24,10 @@ python -m ipykernel install --user --name pytorch-mps --display-name "Python 3.9
 
 ### How to run 
 
-If you don't download the FashionMNIST datasets, edit this code. download=True.
-
-```
-training_data = datasets.FashionMNIST(
-    root='data',
-    train=True,
-    #download=True,
-    download=False,
-    transform=ToTensor(),
-    target_transform=Lambda(lambda y: torch.zeros(10, dtype=torch.float).scatter_(0, torch.tensor(y), value=1))
-)
-```
-
-<br/>
-
 Train using below command.
 
 ```
 python Vanilla-GAN-fashionMNIST.py
-```
-
-<br/>
-
-Create gif using generated images after training.
-
-```
-python create-gif.py
 ```
 
 <br/>
