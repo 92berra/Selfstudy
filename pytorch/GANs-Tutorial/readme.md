@@ -1,4 +1,4 @@
-# Vanilla GAN with FashionMNIST (using mps) / Alpha version
+# GANs Tutorial (using mps) / Alpha version
 
 For this tutorial, you can train using Macbook GPU(mps).
 
