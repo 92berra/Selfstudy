@@ -1,12 +1,17 @@
-# Vanilla GAN with FashionMNIST (using mps)
-### Environment
+# Vanilla GAN with FashionMNIST (using mps) / Alpha version
+
+For this tutorial, you can train using Macbook GPU(mps).
+
+<br/>
+
+## Environment
 - M3 Macbook Pro 
 - macOS Sonoma 14.5
 - VSCode 1.90.2 (Universal)
 
 <br/>
 
-### Install Python and PyTorch
+## Install Python and PyTorch
 
 - <a href='https://docs.conda.io/projects/conda/en/latest/user-guide/install/macos.html'>Miniconda</a>
 - Python 3.9
@@ -22,19 +27,15 @@ python -m ipykernel install --user --name pytorch-mps --display-name "Python 3.9
 
 <br/>
 
-### How to run 
-
-Train using below command.
-
-```
-python Vanilla-GAN-fashionMNIST.py
-```
+## Result
 
 <br/>
 
-### Result
+Vanilla GAN with FashionMNIST
 
-<img src='result/sample_animation.gif'/>
+<br/>
+
+<img src='Figures/Lab1_result_sample.gif'/>
 
 <br/>
 <br/>
