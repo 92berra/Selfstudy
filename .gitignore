@@ -5,5 +5,7 @@
 pytorch/data
 pytorch/*/data
 pytorch/*/result
+pytorch/*/*/data
+pytorch/*/*/result
 c/*.out
 
