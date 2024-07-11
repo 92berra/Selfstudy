@@ -18,7 +18,6 @@ git fetch --unshallow
 
 ```
 git rm -r --cached .
-git add .
 git commit -m "Apply .gitignore"
 git push -u origin main
 ```
