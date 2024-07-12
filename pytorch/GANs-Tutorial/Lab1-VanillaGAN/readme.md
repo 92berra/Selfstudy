@@ -1,10 +1,6 @@
 # GANs-Tutorial/Lab1-VanillaGAN
 
-Hi there. 😍 <br/>
-This repository is separated by dataset. <br/>
-The first one is VanillaGAN with FashionMNIST, and the other is VanillaGAN with Korean(related with my graduate research).<br/>
-If you have any question, please contact me. <br/>
-Thank you! <br/>
+Hi there. 😍 This repository is separated by dataset. The first one is VanillaGAN with FashionMNIST, and the other is VanillaGAN with Korean(related with my graduate research). If you have any question, please contact me. Thank you! <br/>
 
 <br/>
 <br/>
