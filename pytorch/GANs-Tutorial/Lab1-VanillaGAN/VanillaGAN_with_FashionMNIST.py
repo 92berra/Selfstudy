@@ -3,25 +3,27 @@ from torchvision.transforms import ToTensor
 from torch.utils.data import DataLoader
 from torchvision.transforms import ToTensor, Lambda
 from PIL import Image
-from torchsummary import summary
 import matplotlib.pyplot as plt
 import torch.nn as nn
 import torch.optim as optim
 import numpy as np
-import torch 
-import os
+import torch, os
 
-# mps setting
+# MPS
 device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
 print(f"{device} is available.")
 
-# save model
+# Directory
+model_dir = os.path.join('result/1/model')
+os.makedirs(model_dir, exist_ok=True)
+
 image_dir = os.path.join('result/1/sample')
 os.makedirs(image_dir, exist_ok=True)
 
 loss_dir = os.path.join('result/1/loss')
 os.makedirs(loss_dir, exist_ok=True)
 
+# Datasets
 training_data = datasets.FashionMNIST(
     root='data/target/1',
     train=True,
@@ -37,11 +39,13 @@ test_data = datasets.FashionMNIST(
     transform=ToTensor()
 )
 
+# Hyperparameters
 NOISE = 100
 INPUT_SIZE = 28 * 28
 BATCH_SIZE = 64
-EPOCHS = 1000000
+EPOCHS = 1000
 
+# Generator
 class Generator(nn.Module):
     def __init__(self, noise):
         super(Generator, self).__init__()
@@ -62,6 +66,7 @@ class Generator(nn.Module):
         img = img.view(img.size(0), 1, 28, 28)  # reshape to (batch_size, 1, 28, 28)
         return img
     
+# Discriminator
 class Discriminator(nn.Module):
     def __init__(self, input_size):
         super(Discriminator, self).__init__()
@@ -87,10 +92,12 @@ class Discriminator(nn.Module):
         x = x.view(x.size(0), -1)
         x = self.model(x)
         return x
-    
+
+# Generate Model
 generator = Generator(NOISE).to(device)
 discriminator = Discriminator(INPUT_SIZE).to(device)
 
+# Loss, Optimizer
 criterion = nn.BCELoss()
 optimizer_discriminator = optim.Adam(discriminator.parameters(), lr=1e-4)
 optimizer_generator = optim.Adam(generator.parameters(), lr=1e-4)
@@ -104,34 +111,11 @@ output = discriminator(x)
 
 train_loader = DataLoader(training_data, batch_size=BATCH_SIZE, shuffle=True)
 
-
+# Visualize
 def visualize_training(epoch, d_losses, g_losses):
-    plt.figure(figsize=(8, 4))
-    plt.plot(d_losses, label='Discriminator Loss')
-    plt.plot(g_losses, label='Generatror Loss')
-    plt.xlabel('Epoch')
-    plt.ylabel('Loss')
-    plt.legend()
-    plt.show()
-    
     print(f'epoch: {epoch}, Discriminator Loss: {np.asarray(d_losses).mean():.4f}, Generator Loss: {np.asarray(g_losses).mean():.4f}')
     
-    #Visualize after creating sample data
-    noise = torch.randn(24, NOISE).to(device)
-    generator.eval()
-    with torch.no_grad():
-        generated_images = generator(noise).cpu().detach().numpy()
-    generated_images = generated_images.reshape(-1, 28, 28)
-    generated_images = (generated_images * 255).astype(np.uint8)
-    
-    plt.figure(figsize=(8, 4))
-    for i in range(generated_images.shape[0]):
-        plt.subplot(4, 6, i+1)
-        plt.imshow(generated_images[i], interpolation='nearest', cmap='gray')
-        plt.axis('off')
-    plt.tight_layout()
-    plt.show()
-
+# Save
 def save_loss(epoch, d_losses, g_losses, loss_dir):
     os.makedirs(loss_dir, exist_ok=True)
 
@@ -144,7 +128,6 @@ def save_loss(epoch, d_losses, g_losses, loss_dir):
     plt.title(f'epoch: {epoch}, Discriminator Loss: {np.asarray(d_losses).mean():.4f}, Generator Loss: {np.asarray(g_losses).mean():.4f}')
     plt.savefig(os.path.join(loss_dir, f'generated_images_epoch_{epoch}.png'))
     plt.close()    
-
 
 def save_sample(epoch, image_dir, NOISE):
     if not os.path.exists(image_dir):
@@ -163,7 +146,7 @@ def save_sample(epoch, image_dir, NOISE):
         img = Image.fromarray(generated_images[i], mode='L')
         img.save(os.path.join(image_dir, f'{epoch}_{i}.png'))
 
-
+# Train
 d_losses = []
 g_losses = []
 

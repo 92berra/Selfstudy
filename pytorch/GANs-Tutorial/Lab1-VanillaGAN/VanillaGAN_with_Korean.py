@@ -1,11 +1,18 @@
-import torch 
-import os
+from torch.utils.data import Dataset, DataLoader
+from torchsummary import summary
+from torchvision.transforms import transforms
+from PIL import Image, ImageFont, ImageDraw
+import matplotlib.pyplot as plt
+import torch.nn as nn
+import torch.optim as optim
+import numpy as np
+import torch, os, glob, io
 
-# mps setting
+# MPS
 device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
 print(f"{device} is available.")
 
-# save model
+# Directory
 model_dir = os.path.join('result/2/model')
 os.makedirs(model_dir, exist_ok=True)
 
@@ -15,25 +22,14 @@ os.makedirs(image_dir, exist_ok=True)
 loss_dir = os.path.join('result/2/loss')
 os.makedirs(loss_dir, exist_ok=True)
 
-from torch.utils.data import Dataset, DataLoader
-from torchsummary import summary
-from torchvision.transforms import transforms
-import matplotlib.pyplot as plt
-import torch.nn as nn
-import torch.optim as optim
-import numpy as np
-
-
-import glob, io
-from PIL import Image, ImageFont, ImageDraw
-
+# Generate Font Image
 TXT_FILE = 'data/characters/50characters.txt'
 FONTS_DIR = 'data/fonts'
 IMAGE_DIR = 'data/target/2'
 
 if not os.path.exists(IMAGE_DIR):
     os.makedirs(os.path.join(IMAGE_DIR))
-    
+
 IMAGE_WIDTH = 28
 IMAGE_HEIGHT = 28
 
@@ -96,13 +92,15 @@ for character in labels:
 char_no = 0
             
 print('Finished generating {} images.'.format(total_count))
+# Generate Font Image End
 
-
+# Hyperparameters
 NOISE = 100
 INPUT_SIZE = 28*28
 BATCH_SIZE = 32
-EPOCHS = 1000000
+EPOCHS = 10000
 
+# Datasets
 class CustomDataset(Dataset):
     def __init__(self, root_dir, transform=None):
         self.root_dir = root_dir
@@ -119,16 +117,19 @@ class CustomDataset(Dataset):
             image = self.transform(image)
         image = image.view(-1)
         return image
-    
+
+# Transform
 transform = transforms.Compose([
     transforms.Resize((28, 28)),
     transforms.ToTensor(),
     transforms.Normalize((0.5,), (0.5,))
 ])
-    
+
+# DataLoader
 dataset = CustomDataset(root_dir='data/target/2', transform=transform)
 train_loader = DataLoader(dataset, batch_size=BATCH_SIZE, shuffle=True)
 
+# Generator
 class Generator(nn.Module):
     def __init__(self, noise):
         super(Generator, self).__init__()
@@ -149,6 +150,7 @@ class Generator(nn.Module):
         img = img.view(img.size(0), 1, 28, 28)
         return img
 
+# Discriminator
 class Discriminator(nn.Module):
     def __init__(self, input_size):
         super(Discriminator, self).__init__()
@@ -174,10 +176,12 @@ class Discriminator(nn.Module):
         x = x.view(x.size(0), -1)
         x = self.model(x)
         return x
-    
+
+# Generate Model 
 generator = Generator(NOISE).to(device)
 discriminator = Discriminator(INPUT_SIZE).to(device)
 
+# Loss, Optimizer
 criterion = nn.BCELoss()
 optimizer_discriminator = optim.Adam(discriminator.parameters(), lr=1e-4)
 optimizer_generator = optim.Adam(generator.parameters(), lr=1e-4)
@@ -185,34 +189,11 @@ optimizer_generator = optim.Adam(generator.parameters(), lr=1e-4)
 for param in discriminator.parameters():
     param.requires_grad = True
 
-
+# Visualize
 def visualize_training(epoch, d_losses, g_losses):
-    plt.figure(figsize=(8, 4))
-    plt.plot(d_losses, label='Discriminator Loss')
-    plt.plot(g_losses, label='Generatror Loss')
-    plt.xlabel('Epoch')
-    plt.ylabel('Loss')
-    plt.legend()
-    plt.show()
-    
     print(f'epoch: {epoch}, Discriminator Loss: {np.asarray(d_losses).mean():.4f}, Generator Loss: {np.asarray(g_losses).mean():.4f}')
     
-    #Visualize after creating sample data
-    noise = torch.randn(24, NOISE).to(device)
-    generator.eval()
-    with torch.no_grad():
-        generated_images = generator(noise).cpu().detach().numpy()
-    generated_images = generated_images.reshape(-1, 28, 28)
-    generated_images = (generated_images * 255).astype(np.uint8)
-    
-    plt.figure(figsize=(8, 4))
-    for i in range(generated_images.shape[0]):
-        plt.subplot(4, 6, i+1)
-        plt.imshow(generated_images[i], interpolation='nearest', cmap='gray')
-        plt.axis('off')
-    plt.tight_layout()
-    plt.show()
-
+# Save
 def save_loss(epoch, d_losses, g_losses, loss_dir):
     os.makedirs(loss_dir, exist_ok=True)
 
@@ -243,8 +224,8 @@ def save_sample(epoch, image_dir, NOISE):
         img = Image.fromarray(generated_images[i], mode='L')
         img.save(os.path.join(image_dir, f'{epoch}_{i}.png'))
 
-
-    d_losses = []
+# Train
+d_losses = []
 g_losses = []
 
 for epoch in range(1, EPOCHS + 1):
