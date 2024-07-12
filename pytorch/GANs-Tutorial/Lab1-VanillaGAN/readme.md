@@ -11,7 +11,7 @@ Thank you! <br/>
 
 ## Lab Overview
 
-<img src='../Figures/Lab1_overview_v2.png/>
+<img src='../Figures/Lab1_overview_v2.png'/>
 
 <br/>
 <br/>
