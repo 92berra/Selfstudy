@@ -26,7 +26,7 @@ GIF will be uploaded.
 VanillaGAN with Korean <br/>
 
 <div align='center'>
-    <img src='result/2/sample_animation.gif' width='500'/>
+    <img src='../Figures/Lab1_result_sample_Korean.gif' width='500'/>
 </div>
 
 <br/>
