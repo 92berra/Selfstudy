@@ -23,7 +23,7 @@ GIF will be uploaded.
 
 VanillaGAN with Korean <br/>
 
-<img src='result/2/sample_animation.gif'>
+<img src='result/2/sample_animation.gif'/>
 
 <br/>
 <br/>
