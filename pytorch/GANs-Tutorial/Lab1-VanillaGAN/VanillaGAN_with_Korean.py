@@ -98,7 +98,7 @@ print('Finished generating {} images.'.format(total_count))
 NOISE = 100
 INPUT_SIZE = 28*28
 BATCH_SIZE = 32
-EPOCHS = 10000
+EPOCHS = 100000
 
 # Datasets
 class CustomDataset(Dataset):
@@ -220,9 +220,15 @@ def save_sample(epoch, image_dir, NOISE):
     generated_images = generated_images.reshape(-1, 28, 28) * 255
     generated_images = generated_images.astype(np.uint8)
 
+    plt.figure(figsize=(8, 4))
     for i in range(generated_images.shape[0]):
-        img = Image.fromarray(generated_images[i], mode='L')
-        img.save(os.path.join(image_dir, f'{epoch}_{i}.png'))
+        plt.subplot(4, 6, i+1)
+        plt.imshow(generated_images[i], interpolation='nearest', cmap='gray')
+        plt.axis('off')
+    plt.tight_layout()
+    plt.title(f'epoch: {epoch}')
+    plt.savefig(os.path.join(image_dir, f'generated_images_epoch_{epoch}.png'))
+    plt.close()
 
 # Train
 d_losses = []
@@ -267,8 +273,9 @@ for epoch in range(1, EPOCHS + 1):
         d_losses.append(d_loss_real.item() + d_loss_fake.item())
         g_losses.append(g_loss.item())
 
+    if epoch == 1 or epoch % 10 == 0:
+        visualize_training(epoch, d_losses, g_losses)
         save_loss(epoch, d_losses, g_losses, loss_dir)
         save_sample(epoch, image_dir, NOISE)
-    
-        if epoch == 1 or epoch % 10 == 0:
-            visualize_training(epoch, d_losses, g_losses)
+        torch.save(generator.state_dict(), os.path.join(model_dir, f"generator.pth"))
+        torch.save(discriminator.state_dict(), os.path.join(model_dir, f"discriminator.pth"))
