@@ -26,18 +26,6 @@ python -m ipykernel install --user --name pytorch-mps --display-name "Python 3.9
 ```
 
 <br/>
-
-## Result
-
-<br/>
-
-Vanilla GAN with FashionMNIST
-
-<br/>
-
-<img src='Figures/Lab1_result_sample.gif'/>
-
-<br/>
 <br/>
 <br/>
 <br/>
