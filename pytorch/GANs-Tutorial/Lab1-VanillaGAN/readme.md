@@ -7,7 +7,7 @@ Hi there. 😍 This repository is separated by dataset. The first one is Vanilla
 
 ## Lab Overview
 
-<img src='../Figures/Lab1_overview_v2.png'/>
+<img src='../Figures/Lab1_overview_v2.png' width='700'/>
 
 <br/>
 <br/>
@@ -23,7 +23,7 @@ GIF will be uploaded.
 
 VanillaGAN with Korean <br/>
 
-<img src='result/2/sample_animation.gif'/>
+<img src='result/2/sample_animation.gif' width='600'/>
 
 <br/>
 <br/>
