@@ -9,7 +9,7 @@ def create_gif(png_dir, gif_path, duration=0.5):
             images.append(imageio.imread(file_path))
     imageio.mimsave(gif_path, images, duration=duration)
 
-png_dir = './result/sample'
-gif_path = './result/sample_animation.gif'
+png_dir = 'Lab1-VanillaGAN/result/2/sample'
+gif_path = 'Lab1-VanillaGAN/result/2/sample_animation.gif'
 
 create_gif(png_dir, gif_path)
