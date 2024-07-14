@@ -14,13 +14,13 @@ device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
 print(f"{device} is available.")
 
 # Directory
-model_dir = os.path.join('result/1/model')
+model_dir = os.path.join('result/1-2/model')
 os.makedirs(model_dir, exist_ok=True)
 
-image_dir = os.path.join('result/1/sample')
+image_dir = os.path.join('result/1-2/sample')
 os.makedirs(image_dir, exist_ok=True)
 
-loss_dir = os.path.join('result/1/loss')
+loss_dir = os.path.join('result/1-2/loss')
 os.makedirs(loss_dir, exist_ok=True)
 
 # Datasets
@@ -43,7 +43,7 @@ test_data = datasets.FashionMNIST(
 NOISE = 100
 INPUT_SIZE = 28 * 28
 BATCH_SIZE = 64
-EPOCHS = 100
+EPOCHS = 1000
 
 # Generator
 class Generator(nn.Module):
