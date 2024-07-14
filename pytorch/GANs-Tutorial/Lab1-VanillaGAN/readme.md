@@ -22,7 +22,7 @@
 <br/>
 
 <div align='center'>
-    GIF will be uploaded.
+    <img src='figures/result_1.gif'>
 </div>
 
 <br/>

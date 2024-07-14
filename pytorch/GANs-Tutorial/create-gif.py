@@ -11,11 +11,9 @@ def create_gif(png_dir, duration=0.5):
     imageio.mimsave(gif_path, images, duration=duration)
 
 png_dir = 'Lab1-VanillaGAN/result/1/sample'
-gif_path = 'Lab1-VanillaGAN/Figure/result_1.gif'
+gif_path = 'Lab1-VanillaGAN/figures/result_1.gif'
 
-png_dir = 'Lab1-VanillaGAN/result/2/sample'
-gif_path = 'Lab1-VanillaGAN/Figure/result_2.gif'
-
-
+# png_dir = 'Lab1-VanillaGAN/result/2/sample'
+# gif_path = 'Lab1-VanillaGAN/Figure/result_2.gif'
 
 create_gif(png_dir)
