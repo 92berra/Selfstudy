@@ -16,7 +16,7 @@ Hi there. 😍 This repository is separated by dataset. The first one is Vanilla
 
 ## Result
 
-
+<br/>
 
 <div align='center'>
 VanillaGAN with FashionMNIST <br/>
