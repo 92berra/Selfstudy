@@ -27,7 +27,7 @@ VanillaGAN with FashionMNIST <br/>
 VanillaGAN with Korean <br/>
 
 <div align='center'>
-    <img src='../Figures/Lab1_result_sample_Korean.gif' width='500'/>
+    <img src='../Figures/Lab1_sample_animation_Korean.gif' width='500'/>
 </div>
 
 <br/>
