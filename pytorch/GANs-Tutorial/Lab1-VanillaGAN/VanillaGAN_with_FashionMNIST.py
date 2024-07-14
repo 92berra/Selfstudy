@@ -43,7 +43,7 @@ test_data = datasets.FashionMNIST(
 NOISE = 100
 INPUT_SIZE = 28 * 28
 BATCH_SIZE = 64
-EPOCHS = 10000
+EPOCHS = 100
 
 # Generator
 class Generator(nn.Module):
@@ -145,7 +145,6 @@ def save_sample(epoch, image_dir, NOISE):
         plt.imshow(generated_images[i], interpolation='nearest', cmap='gray')
         plt.axis('off')
     plt.tight_layout()
-    plt.title(f'epoch: {epoch}')
     plt.savefig(os.path.join(image_dir, f'generated_images_epoch_{epoch}.png'))
     plt.close()
 

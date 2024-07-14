@@ -5,7 +5,7 @@
 ## Lab Overview
 
 <div align='center'>
-    <img src='../Figures/Lab1_overview_v2.png' width='700'/>
+    <img src='Figure/Lab1_overview_v2.png' width='700'/>
 </div>
 
 <br/>
@@ -17,7 +17,7 @@
 
 <div align='center'>
 VanillaGAN with FashionMNIST <br/>
-    <img src='../Figures/Lab1_result_sample.gif' width='500'/>
+    <img src='Figure/Lab1_result_sample.gif' width='500'/>
 </div>
 <br/>
 <br/>
@@ -26,7 +26,7 @@ VanillaGAN with FashionMNIST <br/>
 
 <div align='center'>
 VanillaGAN with Korean <br/>
-    <img src='../Figures/Lab1_sample_animation_Korean.gif' width='500'/>
+    <img src='Figure/Lab1_sample_animation_Korean.gif' width='500'/>
 </div>
 
 <br/>

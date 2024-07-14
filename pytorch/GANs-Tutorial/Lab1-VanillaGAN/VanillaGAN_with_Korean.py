@@ -98,7 +98,7 @@ print('Finished generating {} images.'.format(total_count))
 NOISE = 100
 INPUT_SIZE = 28*28
 BATCH_SIZE = 32
-EPOCHS = 100000
+EPOCHS = 1000000
 
 # Datasets
 class CustomDataset(Dataset):
@@ -226,7 +226,6 @@ def save_sample(epoch, image_dir, NOISE):
         plt.imshow(generated_images[i], interpolation='nearest', cmap='gray')
         plt.axis('off')
     plt.tight_layout()
-    plt.title(f'epoch: {epoch}')
     plt.savefig(os.path.join(image_dir, f'generated_images_epoch_{epoch}.png'))
     plt.close()
 
