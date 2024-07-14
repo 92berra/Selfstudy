@@ -5,7 +5,7 @@
 ## Lab Overview
 
 <div align='center'>
-    <img src='Figure/Lab1_overview_v2.png' width='700'/>
+    <img src='figures/overview.png' width='700'/>
 </div>
 
 <br/>
@@ -16,19 +16,29 @@
 <br/>
 
 <div align='center'>
-VanillaGAN with FashionMNIST <br/>
-    <img src='Figure/Lab1_result_sample.gif' width='500'/>
+    VanillaGAN with FasionMNIST
 </div>
-<br/>
-<br/>
 
-
+<br/>
 
 <div align='center'>
-VanillaGAN with Korean <br/>
-    <img src='Figure/Lab1_sample_animation_Korean.gif' width='500'/>
+    GIF will be uploaded.
 </div>
 
+<br/>
+<br/>
+
+<div align='center'>
+    VanillaGAN with Korean
+</div>
+
+<br/>
+
+<div align='center'>
+    GIF will be uploaded.
+</div>
+
+<br/>
 <br/>
 <br/>
 <br/>
