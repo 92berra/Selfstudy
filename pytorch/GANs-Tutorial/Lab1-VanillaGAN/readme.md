@@ -22,7 +22,7 @@
 <br/>
 
 <div align='center'>
-    <img src='figures/result_1-3.gif' width='500'/>
+    <img src='figures/result_1-3.gif' width='400'/>
 </div>
 
 <br/>
@@ -35,7 +35,7 @@
 <br/>
 
 <div align='center'>
-    <img src='figures/result_2.gif' width='500'/>
+    <img src='figures/result_2.gif' width='400'/>
 </div>
 
 <br/>
