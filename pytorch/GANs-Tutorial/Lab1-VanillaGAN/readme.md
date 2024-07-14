@@ -18,8 +18,9 @@ Hi there. 😍 This repository is separated by dataset. The first one is Vanilla
 
 VanillaGAN with FashionMNIST <br/>
 
-GIF will be uploaded.
-
+<div align='center'>
+    <img src='../Figures/Lab1_result_sample.gif' width='500'/>
+</div>
 <br/>
 <br/>
 
