@@ -43,7 +43,7 @@ test_data = datasets.FashionMNIST(
 NOISE = 1000
 INPUT_SIZE = 28 * 28
 BATCH_SIZE = 64
-EPOCHS = 1000
+EPOCHS = 100
 
 # Generator
 class Generator(nn.Module):

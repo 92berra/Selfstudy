@@ -13,8 +13,8 @@ def create_gif(png_dir, gif_path, duration=0.5, loop=0):
 png_dir_1 = 'Lab1-VanillaGAN/result/1-3/sample'
 gif_path_1 = 'Lab1-VanillaGAN/figures/result_1-3.gif'
 
-png_dir_2 = 'Lab1-VanillaGAN/result/2/sample'
-gif_path_2 = 'Lab1-VanillaGAN/figures/result_2.gif'
+# png_dir_2 = 'Lab1-VanillaGAN/result/2/sample'
+# gif_path_2 = 'Lab1-VanillaGAN/figures/result_2.gif'
 
 create_gif(png_dir_1, gif_path_1)
-create_gif(png_dir_2, gif_path_2)
+# create_gif(png_dir_2, gif_path_2)
