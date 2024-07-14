@@ -16,17 +16,19 @@ Hi there. 😍 This repository is separated by dataset. The first one is Vanilla
 
 ## Result
 
-VanillaGAN with FashionMNIST <br/>
+
 
 <div align='center'>
+VanillaGAN with FashionMNIST <br/>
     <img src='../Figures/Lab1_result_sample.gif' width='500'/>
 </div>
 <br/>
 <br/>
 
-VanillaGAN with Korean <br/>
+
 
 <div align='center'>
+VanillaGAN with Korean <br/>
     <img src='../Figures/Lab1_sample_animation_Korean.gif' width='500'/>
 </div>
 
