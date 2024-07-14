@@ -1,11 +1,11 @@
-# GANs-Tutorial/Lab1-VanillaGAN
+# Lab1: VanillaGAN
 
 <br/>
 
 ## Lab Overview
 
 <div align='center'>
-    <img src='figures/overview.png' width='700'/>
+    <img src='figures/overview.png' width='600'/>
 </div>
 
 <br/>
@@ -22,7 +22,7 @@
 <br/>
 
 <div align='center'>
-    <img src='figures/result_1-2.gif'>
+    <img src='figures/result_1-3.gif' width='500'/>
 </div>
 
 <br/>
@@ -35,12 +35,9 @@
 <br/>
 
 <div align='center'>
-    GIF will be uploaded.
+    <img src='figures/result_2.gif' width='500'/>
 </div>
 
-<br/>
-<br/>
-<br/>
 <br/>
 <br/>
 <br/>

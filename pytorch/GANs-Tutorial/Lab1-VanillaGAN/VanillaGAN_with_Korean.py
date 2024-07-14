@@ -98,7 +98,7 @@ print('Finished generating {} images.'.format(total_count))
 NOISE = 100
 INPUT_SIZE = 28*28
 BATCH_SIZE = 32
-EPOCHS = 1000000
+EPOCHS = 1000
 
 # Datasets
 class CustomDataset(Dataset):
