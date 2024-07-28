@@ -1,49 +1,69 @@
-from torchvision import datasets
-from torchvision.transforms import ToTensor
-from torch.utils.data import DataLoader
-from torchvision.transforms import ToTensor, Lambda
-import torchvision.models as moodels
+from torch.utils.data import Dataset, DataLoader
+from torchsummary import summary
+from torchvision.transforms import transforms
+from PIL import Image, ImageFont, ImageDraw
 import matplotlib.pyplot as plt
 import torch.nn as nn
 import torch.optim as optim
 import numpy as np
-import torch, os
+import torch, os, glob, io
 
 # MPS
 device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
 print(f"{device} is available.")
 
 # Directory
-model_dir = os.path.join('result/1-5/model')
+model_dir = os.path.join('result/2/model')
 os.makedirs(model_dir, exist_ok=True)
 
-image_dir = os.path.join('result/1-5/sample')
+image_dir = os.path.join('result/2/sample')
 os.makedirs(image_dir, exist_ok=True)
 
-loss_dir = os.path.join('result/1-5/loss')
+loss_dir = os.path.join('result/2/loss')
 os.makedirs(loss_dir, exist_ok=True)
 
-# Datasets
-training_data = datasets.FashionMNIST(
-    root='data/target/1',
-    train=True,
-    download=False,
-    transform=ToTensor(),
-    target_transform=Lambda(lambda y: torch.zeros(10, dtype=torch.float).scatter_(0, torch.tensor(y), value=1))
-)
+# Generate Font Image
+TXT_FILE = 'data/characters/50characters.txt'
+FONTS_DIR = 'data/fonts'
+IMAGE_DIR = 'data/target/2'
 
-test_data = datasets.FashionMNIST(
-    root='data/target/1',
-    train=False,
-    download=False,
-    transform=ToTensor()
-)
+if not os.path.exists(IMAGE_DIR):
+    os.makedirs(os.path.join(IMAGE_DIR))
 
 # Hyperparameters
 NOISE = 10
-INPUT_SIZE = 28 * 28
-BATCH_SIZE = 64
+INPUT_SIZE = 28*28
+BATCH_SIZE = 32
 EPOCHS = 100
+
+# Datasets
+class CustomDataset(Dataset):
+    def __init__(self, root_dir, transform=None):
+        self.root_dir = root_dir
+        self.transform = transform
+        self.image_paths = [os.path.join(root_dir, file) for file in os.listdir(root_dir) if file.endswith('.png')]
+
+    def __len__(self):
+        return len(self.image_paths)
+
+    def __getitem__(self, idx):
+        img_path = self.image_paths[idx]
+        image = Image.open(img_path).convert('L')
+        if self.transform:
+            image = self.transform(image)
+        image = image.view(-1)
+        return image
+
+# Transform
+transform = transforms.Compose([
+    transforms.Resize((28, 28)),
+    transforms.ToTensor(),
+    transforms.Normalize((0.5,), (0.5,))
+])
+
+# DataLoader
+dataset = CustomDataset(root_dir='data/target/2', transform=transform)
+train_loader = DataLoader(dataset, batch_size=BATCH_SIZE, shuffle=True)
 
 # Generator
 class Generator(nn.Module):
@@ -63,9 +83,9 @@ class Generator(nn.Module):
     
     def forward(self, z):
         img = self.model(z)
-        img = img.view(img.size(0), 1, 28, 28)  # reshape to (batch_size, 1, 28, 28)
+        img = img.view(img.size(0), 1, 28, 28)
         return img
-    
+
 # Discriminator
 class Discriminator(nn.Module):
     def __init__(self, input_size):
@@ -93,7 +113,7 @@ class Discriminator(nn.Module):
         x = self.model(x)
         return x
 
-# Generate Model
+# Generate Model 
 generator = Generator(NOISE).to(device)
 discriminator = Discriminator(INPUT_SIZE).to(device)
 
@@ -103,13 +123,7 @@ optimizer_discriminator = optim.Adam(discriminator.parameters(), lr=1e-4)
 optimizer_generator = optim.Adam(generator.parameters(), lr=1e-4)
 
 for param in discriminator.parameters():
-    param.requires_grad = False
-
-gan_input = torch.randn(BATCH_SIZE, NOISE).to(device)
-x = generator(gan_input)
-output = discriminator(x)
-
-train_loader = DataLoader(training_data, batch_size=BATCH_SIZE, shuffle=True)
+    param.requires_grad = True
 
 # Visualize
 def visualize_training(epoch, d_losses, g_losses):
@@ -130,15 +144,18 @@ def save_loss(epoch, d_losses, g_losses, loss_dir):
     plt.close()    
 
 def save_sample(epoch, image_dir, NOISE):
+    if not os.path.exists(image_dir):
+        os.makedirs(image_dir)
+    
     noise = torch.randn(24, NOISE).to(device)
 
     generator.eval()
     with torch.no_grad():
-        generated_images = generator(noise).cpu().detach().numpy()
-
+        generated_images = generator(noise).cpu().numpy()
+    
     generated_images = generated_images.reshape(-1, 28, 28) * 255
     generated_images = generated_images.astype(np.uint8)
-    
+
     plt.figure(figsize=(8, 4))
     for i in range(generated_images.shape[0]):
         plt.subplot(4, 6, i+1)
@@ -153,8 +170,7 @@ d_losses = []
 g_losses = []
 
 for epoch in range(1, EPOCHS + 1):
-    for i, (real_images, _) in enumerate(train_loader):
-
+    for i, real_images in enumerate(train_loader):
         batch_size = real_images.size(0)
         real_images = real_images.view(batch_size, -1).to(device)
 
@@ -163,9 +179,7 @@ for epoch in range(1, EPOCHS + 1):
         fake_labels = torch.zeros(batch_size, 1).to(device)
 
         # Train Discriminator
-        for param in discriminator.parameters():
-            param.requires_grad = True
-
+        discriminator.train()
         optimizer_discriminator.zero_grad()
 
         outputs = discriminator(real_images)
@@ -173,7 +187,6 @@ for epoch in range(1, EPOCHS + 1):
         d_loss_real.backward()
 
         z = torch.randn(batch_size, NOISE).to(device)
-
         fake_images = generator(z)
         outputs = discriminator(fake_images.detach())
         d_loss_fake = criterion(outputs, fake_labels)
@@ -182,9 +195,7 @@ for epoch in range(1, EPOCHS + 1):
         optimizer_discriminator.step()
 
         # Train Generator
-        for param in discriminator.parameters():
-            param.requires_grad = False
-        
+        generator.train()
         optimizer_generator.zero_grad()
 
         outputs = discriminator(fake_images)
@@ -192,9 +203,10 @@ for epoch in range(1, EPOCHS + 1):
         g_loss.backward()
 
         optimizer_generator.step()
-    
-    d_losses.append(d_loss_real.item() + d_loss_fake.item())
-    g_losses.append(g_loss.item())
+
+        # Record losses
+        d_losses.append(d_loss_real.item() + d_loss_fake.item())
+        g_losses.append(g_loss.item())
 
     if epoch == 1 or epoch % 10 == 0:
         visualize_training(epoch, d_losses, g_losses)
