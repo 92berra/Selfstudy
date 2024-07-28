@@ -1,16 +1,18 @@
 # July 22, 2024 ~ July 28, 2024
 
-### Done
+<br/>
+
+## Done
 #### Certificates 
 - Engineer Information Processing (Practical): Studied average 4 hours
-- Engineer Information Processing (Practical): Finished test.
+- Engineer Information Processing (Practical): Test
 
 #### Portfolio
-- GANs Tutorial > Lab1 completed
+- GANs Tutorial > Lab1 
 
 <br/>
 
-### To do
+## To do
 #### Certificates
 - SQLD: 3H/DAY
 - Linux Master 1st grade: 3H/DAY
@@ -26,13 +28,13 @@
 
 <br/>
 
-### What's disappointing
+## What's disappointing
 - Confused about how to study and couldn't focus.
 - Spent a lot of time sitting around blankly and looking at Instagram Reels.
 
 <br/>
 
-### Resolutions
+## Resolutions
 - Go out of the house unconditionally.
 - Reduce the time spent looking at Instagram Reels.
 - Reduce the time spent sitting around blankly.
