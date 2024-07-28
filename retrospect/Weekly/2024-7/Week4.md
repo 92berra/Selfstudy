@@ -4,7 +4,7 @@
 
 ## Done
 #### Certificates 
-- Engineer Information Processing (Practical): Studied average 4 hours
+- Engineer Information Processing (Practical): Studied 4H/DAY
 - Engineer Information Processing (Practical): Test
 
 #### Portfolio
